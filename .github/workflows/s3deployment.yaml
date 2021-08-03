@@ -1,0 +1,29 @@
+on: [push]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      # checkout the repo
+    - uses: actions/checkout@master
+    - uses: Azure/login@v1
+    #   with:
+    #     creds: ${{ secrets.AZURE_CREDENTIALS }} # Define secret variable in repository settings as per action documentation
+    - uses: Azure/get-keyvault-secrets@v1
+      with:
+        keyvault: "adesuwars3"
+        secrets: 'adesuwarsecretkey, adesuwaraccesskey'
+      id: myGetSecretAction
+
+    # - uses: Azure/docker-login@v1
+    #   with:
+    #     login-server: mycontainer.azurecr.io
+    #     username: ${{ steps.myGetSecretAction.outputs.adesuwarsecretkey}}
+    #     password: ${{ steps.myGetSecretAction.outputs.adesuwaraccesskey }}
+    - run: |
+        echo ${{ steps.myGetSecretAction.outputs.adesuwarsecretkey}}
+        echo ${{ steps.myGetSecretAction.outputs.adesuwaraccesskey }}
+        
+ 
+
+        
