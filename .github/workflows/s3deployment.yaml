@@ -16,9 +16,9 @@ jobs:
     - name: Terraform fmt
       id: fmt
       run: terraform fmt -check
-#       env:
-#         TERRAFORM_CLI_PATH: C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
-#       continue-on-error: true
+      env:
+        TERRAFORM_CLI_PATH: C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
+      continue-on-error: true
 
     - name: Terraform Init
       id: init
@@ -26,8 +26,8 @@ jobs:
         cd $GITHUB_WORKSPACE/Terraform
         Set-Item -Path env:TERRAFORM_CLI_PATH -Value "$GITHUB_WORKSPACE"
         terraform init
-#       env:
-#         TERRAFORM_CLI_PATH: C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
+      env:
+        TERRAFORM_CLI_PATH: C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
 
     # - name: Terraform Validate
     #   id: validate
@@ -41,8 +41,8 @@ jobs:
     - name: Terraform apply
       id: apply
       run: terraform apply --auto approve -no-color
-#       env:
-#         TERRAFORM_CLI_PATH: C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
+      env:
+        TERRAFORM_CLI_PATH: C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
     
     # - uses: aws-actions/configure-aws-credentials@v1
     #   with:
