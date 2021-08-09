@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "b" {
-  bucket = "acp4gov_s3_bucket"
+  bucket = "fredademo2"
   acl    = "private"
 
   tags = {
@@ -9,5 +9,5 @@ resource "aws_s3_bucket" "b" {
 }
 
 provider "aws" {
-  region = "eu-east-1"
+  region = "us-east-1"
 }

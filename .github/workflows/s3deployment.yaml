@@ -5,14 +5,36 @@ jobs:
     runs-on: [self-hosted, aws]
     steps:
       # checkout the repo
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
+    - uses: hashicorp/setup-terraform@v1
+
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: true
+
+    - name: Terraform Init
+      id: init
+      run: terraform init
+
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color
+      continue-on-error: true
+
+    - name: Terraform apply
+      id: apply
+      run: terraform apply --auto approve -no-color
+
     - run: aws s3 ls
-    # - uses: Azure/docker-login@v1
-    #   with:
-    #     login-server: mycontainer.azurecr.io
-    #     username: ${{ steps.myGetSecretAction.outputs.adesuwarsecretkey}}
-    #     password: ${{ steps.myGetSecretAction.outputs.adesuwaraccesskey }}
+     
+
     
+
         
  
 
