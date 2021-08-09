@@ -24,7 +24,7 @@ jobs:
       id: init
       run: |
         cd $GITHUB_WORKSPACE/Terraform
-        Set-Item -Path env:TERRAFORM_CLI_PATH -Value "$GITHUB_WORKSPACE/Terraform"
+        Set-Item -Path env:TERRAFORM_CLI_PATH -Value "$GITHUB_WORKSPACE"
         terraform init
 #       env:
 #         TERRAFORM_CLI_PATH: C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
