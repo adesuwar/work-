@@ -3,34 +3,52 @@ on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: [self-hosted, aws]
+    # defaults:
+    #   run:
+    #     working-directory: C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
+        # working-directory: ${{ env.tf_actions_working_dir }}
     steps:
       # checkout the repo
     - uses: actions/checkout@v2
+    - run: ls 
     - uses: hashicorp/setup-terraform@v1
 
     - name: Terraform fmt
       id: fmt
       run: terraform fmt -check
+      env:
+        TERRAFORM_CLI_PATH: C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
       continue-on-error: true
 
     - name: Terraform Init
       id: init
       run: terraform init
+      env:
+        TERRAFORM_CLI_PATH: C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
 
-    - name: Terraform Validate
-      id: validate
-      run: terraform validate -no-color
+    # - name: Terraform Validate
+    #   id: validate
+    #   run: terraform validate -no-color
 
-    - name: Terraform Plan
-      id: plan
-      run: terraform plan -no-color
-      continue-on-error: true
+    # - name: Terraform Plan
+    #   id: plan
+    #   run: terraform plan -no-color
+    #   continue-on-error: true
 
     - name: Terraform apply
       id: apply
       run: terraform apply --auto approve -no-color
+      env:
+        TERRAFORM_CLI_PATH: C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
+    
+    # - uses: aws-actions/configure-aws-credentials@v1
+    #   with:
+    #     aws-region: us-east-1
+    #     role-to-assume: ec2switchrole
 
     - run: aws s3 ls
+
+# C:\Users\Administrator\Desktop\actions-runner\_work\work-\work-
      
 
     
